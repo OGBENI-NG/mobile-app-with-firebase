@@ -1,6 +1,6 @@
 //import { add } from "./utils"
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const inputFieldEl = document.getElementById("text-input")
 const addToCartBtn = document.getElementById("add-to-cart-btn")
@@ -14,15 +14,21 @@ const appSettings = {
 
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
-const itemsInDatabase = ref(database, "shopping-list")
+const itemsInDatabase = ref(database, "shoppingList")
 
 onValue(itemsInDatabase, (snapshot) => {
-    const shoppingListArr = Object.values(snapshot.val())
+    if(snapshot.exists()) {
 
-    clearShoppingItems()
-
-    for (const shoppingListItem of shoppingListArr) {
-       appendShoppingListItems(shoppingListItem)
+        const shoppingListArr = Object.entries(snapshot.val())
+    
+        clearShoppingItems()
+    
+        for (let shoppingListItem of shoppingListArr) {
+            let currentItem = shoppingListItem
+           appendShoppingListItems(currentItem)
+        }
+    } else {
+        shoppingListEl.textContent = "No shopping list found"
     }
 })
 
@@ -41,6 +47,18 @@ function clearInputField() {
     inputFieldEl.value = ''
 }
 
-function appendShoppingListItems(inputItem){
-    shoppingListEl.innerHTML += `<li>${inputItem}</li>`
+function appendShoppingListItems(item){
+    let newEl = document.createElement('li')
+    let itemID = item[0]
+    let itemValue = item[1]
+
+    newEl.textContent = itemValue
+
+    newEl.addEventListener('click', () => {
+        let exactIdLocationInDatabase = ref(database, `shoppingList/${itemID}`)
+        remove(exactIdLocationInDatabase)
+    })
+    shoppingListEl.append(newEl)
+
+
 }

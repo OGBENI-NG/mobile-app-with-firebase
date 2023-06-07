@@ -14,7 +14,7 @@ body, html{
 }
 
 .basket {
-    width: 150px;
+    width: 100px;
     margin: 0 auto;
 }
 
@@ -39,4 +39,24 @@ button {
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+}
+
+ul li {
+    cursor: pointer;
+    font-size: 20px;
+    background-color: #FFFDF8;
+    padding: 15px;
+    border-radius: 8px;
+    flex-grow: 1;
+    text-align: center;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
 }
