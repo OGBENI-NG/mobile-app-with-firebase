@@ -1,4 +1,3 @@
-//import { add } from "./utils"
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
@@ -18,11 +17,12 @@ const itemsInDatabase = ref(database, "shoppingList")
 
 onValue(itemsInDatabase, (snapshot) => {
     if(snapshot.exists()) {
-
+        //turning objects into arrays
         const shoppingListArr = Object.entries(snapshot.val())
     
         clearShoppingItems()
-    
+        
+        //loop through shoppingListArr from database
         for (let shoppingListItem of shoppingListArr) {
             let currentItem = shoppingListItem
            appendShoppingListItems(currentItem)
@@ -36,14 +36,14 @@ onValue(itemsInDatabase, (snapshot) => {
 addToCartBtn.addEventListener("click", () => {
     const inputValue = inputFieldEl.value
     push(itemsInDatabase, inputValue)
-    clearInputField()
+    clearInputFieldEl()
 })
 
 function clearShoppingItems() {
     shoppingListEl.innerHTML = ''
 }
 
-function clearInputField() {
+function clearInputFieldEl() {
     inputFieldEl.value = ''
 }
 
@@ -59,6 +59,4 @@ function appendShoppingListItems(item){
         remove(exactIdLocationInDatabase)
     })
     shoppingListEl.append(newEl)
-
-
 }
