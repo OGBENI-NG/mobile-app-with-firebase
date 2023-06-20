@@ -21,7 +21,7 @@ onValue(itemsInDatabase, (snapshot) => {
         const shoppingListArr = Object.entries(snapshot.val())
     
         clearShoppingItems()
-        
+
         //loop through shoppingListArr from database
         for (let shoppingListItem of shoppingListArr) {
             let currentItem = shoppingListItem
@@ -51,7 +51,8 @@ function appendShoppingListItems(item){
     let newEl = document.createElement('li')
     let itemID = item[0]
     let itemValue = item[1]
-
+ 
+    itemValue = itemValue.charAt(0).toUpperCase() + itemValue.slice(1)
     newEl.textContent = itemValue
 
     newEl.addEventListener('click', () => {

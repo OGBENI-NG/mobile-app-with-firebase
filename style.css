@@ -4,18 +4,28 @@
 body, html{
     margin: 0;
     padding: 0;
+    user-select: none;
+    font-family: 'Rubik', sans-serif;
+    background-color: #EEF0F4;
+    color: #432000;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     max-width: 320px;
-    margin: 40px auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: max-content;
+    margin: auto;
 }
 
 .basket {
     width: 100px;
-    margin: 0 auto;
+    margin: 0 auto 50px;
 }
 
 input {
@@ -27,7 +37,7 @@ input {
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
-    margin: 10px 0;
+    margin: 10px 0 20px;
 }
 
 button {
@@ -39,6 +49,12 @@ button {
     font-size: 20px;
     text-align: center;
     font-family: 'Rubik', sans-serif;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #432000;
 }
 
 ul {
@@ -46,8 +62,9 @@ ul {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px 12px;
     text-align: center;
+    margin-top: -20px;
 }
 
 ul li {
@@ -58,5 +75,8 @@ ul li {
     border-radius: 8px;
     flex-grow: 1;
     text-align: center;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2)
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+}
+ul li:hover {
+    background-color: #FFECC7;
 }
